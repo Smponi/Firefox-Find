@@ -180,7 +180,16 @@
     const query = document.getElementById('ffind-input')?.value;
     if (!query) return;
     clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => search(query), 200);
+    debounceTimer = setTimeout(() => {
+      const savedIndex = currentIndex;
+      search(query);
+      if (savedIndex > 0 && savedIndex < marks.length) {
+        marks.forEach(m => m.classList.remove('ffind-current'));
+        currentIndex = savedIndex;
+        marks[currentIndex].classList.add('ffind-current');
+        updateCount();
+      }
+    }, 200);
   });
 
   observer.observe(document.body, { childList: true, subtree: true });
