@@ -1,8 +1,17 @@
-# Firefox Find
+<p align="center">
+  <img src="icons/icon-96.png" width="96" height="96" alt="Firefox Find Icon" />
+</p>
 
-A Firefox extension that replaces the native Ctrl+F find bar with one that **automatically re-runs the search when new content loads** — infinite scroll, pagination, dynamic content.
+<h1 align="center">Firefox Find</h1>
 
-![Demo](demo.gif)
+<p align="center">
+  A Firefox extension that replaces the native Ctrl+F find bar with one that<br/>
+  <strong>automatically re-runs the search when new content loads</strong> — infinite scroll, pagination, dynamic content.
+</p>
+
+<p align="center">
+  <img src="demo.gif" alt="Demo" width="700" />
+</p>
 
 ## The Problem
 

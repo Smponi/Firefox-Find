@@ -3,6 +3,10 @@
   "name": "Firefox Find",
   "version": "1.0",
   "description": "Auto-reruns find when DOM changes (infinite scroll, dynamic content)",
+  "icons": {
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png"
+  },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
