@@ -44,7 +44,7 @@
     updateCount();
   }
 
-  function search(query) {
+  function search(query, silent = false) {
     clearHighlights();
     if (!query) return;
 
@@ -94,7 +94,7 @@
       parent.removeChild(textNode);
     }
 
-    if (marks.length > 0) {
+    if (marks.length > 0 && !silent) {
       currentIndex = 0;
       scrollToMatch(0);
     }
@@ -182,11 +182,20 @@
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => {
       const savedIndex = currentIndex;
-      search(query);
-      if (savedIndex > 0 && savedIndex < marks.length) {
+      const savedCount = marks.length;
+      search(query, true);
+      if (marks.length > savedCount) {
+        // New matches appeared — jump to first new one
+        currentIndex = savedCount;
         marks.forEach(m => m.classList.remove('ffind-current'));
-        currentIndex = savedIndex;
         marks[currentIndex].classList.add('ffind-current');
+        marks[currentIndex].scrollIntoView({ block: 'center', behavior: 'smooth' });
+        updateCount();
+      } else {
+        // No new matches — stay put, just restore index
+        marks.forEach(m => m.classList.remove('ffind-current'));
+        currentIndex = Math.min(savedIndex, marks.length - 1);
+        if (currentIndex >= 0) marks[currentIndex].classList.add('ffind-current');
         updateCount();
       }
     }, 200);
